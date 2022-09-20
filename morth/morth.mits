@@ -1,0 +1,109 @@
+define main
+
+  //ENVOIRMENT VARIABLE
+
+    str s_to_con = ""
+    int toi = 0
+    int top = 0
+
+    int op_num_1 = 0
+    int op_num_2 =  0
+    
+  //
+  
+
+  str cop = "" // current operation
+  arr int stack = [0] // The stack
+  int sl = len stack
+  str file = argv 2 // file with the morth code
+  str filecontent = readfile file // file contnet
+  arr str prog = eachline filecontent // our program
+  
+  int cpos = 0 // our current possition
+
+  int progl = len prog  // lenght of the program
+
+  print prog
+  
+ 
+  while cpos < progl : call subprocess handlewhile
+
+  
+end
+
+define subprocess handlewhile : main
+    cop = prog pos cpos
+   
+    DO
+    if cop startswith "push": call subprocess push 
+    
+    else : if cop == "print" : call subprocess dump 
+    
+    else : if cop == "plus" : call subprocess plus 
+
+    else : if cop == "min" : call subprocess min 
+
+    else : if cop == "mul" : call subprocess mul 
+    
+    else : if cop == "div" : call subprocess div 
+    
+    else: if cop == "" : pass
+    else : assert False, "Invalid operation"
+    
+ 
+
+    END
+    cpos = cpos + 1
+
+end subprocess
+
+define subprocess mul : main
+
+    op_num_1 = pop stack
+    op_num_2 = pop stack
+    append stack op_num_1 * op_num_2
+
+end subprocess
+
+define subprocess div : main
+
+    op_num_1 = pop stack
+    op_num_2 = pop stack
+    append stack op_num_1 / op_num_2
+
+end subprocess
+
+define subprocess min : main
+
+    op_num_1 = pop stack
+    op_num_2 = pop stack
+    append stack op_num_1 - op_num_2
+
+end subprocess
+
+define subprocess plus : main
+
+    op_num_1 = pop stack
+    op_num_2 = pop stack
+    append stack op_num_1 + op_num_2
+
+end subprocess
+
+define subprocess push : main 
+
+    s_to_con = removefirst cop 4
+    toi = toint s_to_con
+    append stack toi
+
+end subprocess
+
+
+define subprocess dump : main
+
+    top = pop stack
+    print top
+    
+    
+
+
+end subprocess
